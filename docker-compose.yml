@@ -1,6 +1,6 @@
 version: "3.9"
 services:
-  raitiovaunu_app:
+  wom-frontend:
     image: nginx:alpine
     container_name: "wom-frontend"
     restart: always
