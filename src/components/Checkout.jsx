@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 const Checkout = () => {
-    const serviceApiUrl = "http://wom2.spionsatellit.com"
+    const serviceApiUrl = "https://wom2.spionsatellit.com"
     const cabinApiUrl = "https://wom1.spionsatellit.com/cabin"
 
     const [orders, setOrders] = useState([])
