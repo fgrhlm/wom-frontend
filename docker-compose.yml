@@ -1,0 +1,25 @@
+version: "3.9"
+services:
+  raitiovaunu_app:
+    image: nginx:alpine
+    container_name: "wom-frontend"
+    restart: always
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.wom-frontend.rule=Host(`womfront.spionsatellit.com`)"
+      - "traefik.http.wom-frontend.tls.domains[0].main=womfront.spionsatellit.com"
+      - "traefik.http.wom-frontend.entrypoints=websecure"
+      - "traefik.http.wom-frontend.tls=true"
+      - "traefik.http.wom-frontend.tls.certresolver=myresolver"
+      - "traefik.http.wom-frontend.tls.options=wom-frontend@file"
+      - "traefik.http.middlewares.wom-frontend-compression.compress=true"
+      - "traefik.http.routers.wom-frontend.middlewares=wom-frontend-compression"
+    networks:
+      - traefik-public
+    volumes:
+      - "./web/nginx.conf:/etc/nginx/nginx.conf:ro"
+      - "./build/:/usr/share/nginx/html:ro"
+
+networks:
+  traefik-public:
+    external: true
